@@ -215,9 +215,14 @@ export function ChatModal({ toggleOpen }: ChatModalProps) {
 
                   {msg.type === 'upload_prompt' && (
                     <div className="mt-3">
-                      <button onClick={() => handleCameraUpload('reembolso')} className="w-full bg-primary text-white rounded-xl p-4 flex items-center justify-center gap-3">
+                      <button 
+                        onClick={() => handleCameraUpload('reembolso')} 
+                        disabled={isProcessingOCR} // <--- AQUÍ SE USA
+                        className={`w-full bg-primary text-white rounded-xl p-4 flex items-center justify-center gap-3 ${isProcessingOCR ? 'opacity-50' : ''}`}
+                      >
                         <Camera className="w-5 h-5" />
-                        <span>Subir Documentos</span>
+                        {/* AQUÍ TAMBIÉN SE USA: */}
+                        <span>{isProcessingOCR ? 'Procesando...' : 'Subir Documentos'}</span>
                       </button>
                     </div>
                   )}
